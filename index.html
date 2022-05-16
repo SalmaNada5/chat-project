@@ -132,7 +132,8 @@
       function addemoj(e) {
         document.getElementById("input").value += e;
       }
-
+      var time = new Date(); //add time
+      var hours,minutes; //declare variables 
       var names = ["salma", "sara", "sama", "mariam","hazem"];
       var colors = ["blue", "red", "yellow", "green","grey"];
       var name = "";
@@ -159,7 +160,11 @@
           let msg = {
             name: name,
             color: color,
-            value: input.value
+            value: input.value,
+            //from here edit to add time
+            hours:time.getHours(),
+            minutes:time.getMinutes(),
+            
           };
           socket.emit("chat message", msg);
           input.value = "";
@@ -175,7 +180,12 @@
           msg.name +
           " : </span>" +
           " " +
-          msg.value;
+          msg.value+
+          //time editing
+          " <br/>"+
+          (msg.hours - 12)+
+          ":"+
+          msg.minutes;
         // item.textContent = msg;
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
