@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+      }
+      h1 {
+        text-align: center;
+        margin: auto;
+      }
+      .container {
+        height: 500px;
+        width: 500px;
+        margin: auto;
+        display: block;
+        margin-top: 2%;
+        border-top-left-radius: 2rem;
+        border-top-right-radius: 2rem;
+        background-color: rgba(152, 157, 236, 0.747);
+      }
+
+      #form {
+        background: rgba(0, 0, 0, 0.15);
+        padding: 0.25rem;
+        position: absolute;
+        margin: 0;
+        width: 500px;
+        display: none;
+
+        height: 3rem;
+        box-sizing: border-box;
+        backdrop-filter: blur(10px);
+      }
+      #input {
+        border: none;
+        padding: 0 1rem;
+        flex-grow: 1;
+        border-radius: 2rem;
+        margin: 0.25rem;
+      }
+      #input:focus {
+        outline: none;
+      }
+      #form > button {
+        background: #333;
+        border: none;
+        padding: 0 1rem;
+        margin: 0.25rem;
+        border-radius: 3px;
+        outline: none;
+        color: #fff;
+      }
+
+      #form0 {
+        background: rgba(0, 0, 0, 0.15);
+        padding: 0.25rem;
+        position: fixed;
+        margin: 0;
+        width: 500px;
+        display: flex;
+        bottom: 24%;
+        height: 3rem;
+        box-sizing: border-box;
+        backdrop-filter: blur(10px);
+      }
+      #name {
+        border: none;
+        padding: 0 1rem;
+        flex-grow: 1;
+        border-radius: 2rem;
+        margin: 0.25rem;
+      }
+      #name:focus {
+        outline: none;
+      }
+      #form0 > span {
+        background: #333;
+        border: none;
+        padding: 0 1rem;
+        margin: 0.25rem;
+        border-radius: 3px;
+        outline: none;
+        color: #fff;
+      }
+      #messages {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      #messages > li {
+        padding: 0.5rem 1rem;
+      }
+
+      #messages > li:nth-child(odd) {
+        background: #efefef;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <ul id="messages"></ul>
+
+      <div id="con">
+        <h1>
+          WELCOME! to OUR Chat
+        </h1>
+        <span></span>
+        <form id="form0">
+          <input id="name" />
+          <span onclick="takename()">Login</span>
+        </form>
+      </div>
+
+      <form id="form" action="">
+        <input id="input" autocomplete="off" />
+        <span onclick="addemoj(e ='&#128512;')"> &#128512; </span>
+        <button>Send</button>
+      </form>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+      var socket = io();
+
+      function addemoj(e) {
+        document.getElementById("input").value += e;
+      }
+
+      var names = ["salma", "sara", "sama", "mariam","hazem"];
+      var colors = ["blue", "red", "yellow", "green","grey"];
+      var name = "";
+      var color = "";
+      function takename() {
+        let nameval = document.getElementById("name").value;
+        if (names.includes(nameval)) {
+          name = nameval;
+          color = colors[names.indexOf(name)];
+
+          document.getElementById("con").style.display = "none";
+          document.getElementById("form").style.display = "flex";
+        }
+      }
+
+
+      var messages = document.getElementById("messages");
+      var form = document.getElementById("form");
+      var input = document.getElementById("input");
+
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        if (input.value) {
+          let msg = {
+            name: name,
+            color: color,
+            value: input.value
+          };
+          socket.emit("chat message", msg);
+          input.value = "";
+        }
+      });
+
+      socket.on("chat message", function(msg) {
+        var item = document.createElement("li");
+        item.innerHTML =
+          "<span style='color:" +
+          msg.color +
+          ";'>" +
+          msg.name +
+          " : </span>" +
+          " " +
+          msg.value;
+        // item.textContent = msg;
+        messages.appendChild(item);
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+    </script>
+  </body>
+</html>
