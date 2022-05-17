@@ -9,13 +9,13 @@
           Helvetica, Arial;
       }
       h1 {
-        /* added a color to make it white and changed the margin from top  */
+        /* added a color to make it white and changed the margin from top  by sama*/
         text-align: center;
         margin-top: 0.5%;
         color: #fff;
       }
       .container {
-        /* change height, added a border raduis and changed the background color */
+        /* change height, added a border raduis and changed the background color by sama*/
         height: 700px; 
         width: 500px;
         margin: auto;
@@ -27,7 +27,7 @@
       }
 
       #form {
-        /*changed the color */
+        /*changed the color by hazem*/
         background:rgba(191,140,144,255);
         border-radius: 30px;
         padding: 0.10rem;
@@ -35,7 +35,6 @@
         margin-top: 0%;
         width: 500px;
         display: none;
-
         height: 3rem;
         box-sizing: border-box;
         backdrop-filter: blur(10px);
@@ -51,7 +50,7 @@
         outline: none;
       }
       #form > button {
-        /*edit on the send button*/
+        /*edit on the send button by hazem*/
         background: rgba(159,76,86,255);
         border: none;
         padding:0 1rem;
@@ -82,7 +81,7 @@
         outline: none;
       }
       #form0 > span {
-        /*edit on the login button */
+        /*edit on the login button, sama*/
         background: #fff;
         padding: 0 1rem;
         margin: 0.2rem;
@@ -137,13 +136,13 @@
         document.getElementById("input").value += e;
       }
 
-      var names = ["salma", "sara", "sama", "mariam","hazem"]; //change names
+      var names = ["salma", "sara", "sama", "mariam","hazem"]; //change names.
       var colors = ["blue", "red", "yellow", "green","grey"]; //change colors for each user
       var name = "";
       var color = "";
       //add time.
       var time = new Date();
-      var hour,minutes ;
+      var hour,minutes;
 
       function takename() {
         let nameval = document.getElementById("name").value;
@@ -188,9 +187,9 @@
           msg.value+
           //time editing
           " <br/>"+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
-          msg.hour+
+          (msg.hour <= 12 ? msg.hour:msg.hour-12)+
           ":"+
-          msg.minutes;
+          msg.minutes + " " + (msg.hour >= 12? "PM":"AM");
         // item.textContent = msg;
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
