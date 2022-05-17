@@ -1,33 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Socket.IO chat</title>
+    <title>first Socket.IO chat project</title>
 
     <style>
       body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Helvetica, Arial, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif,
+          Helvetica, Arial;
       }
       h1 {
+        /* added a color to make it white and changed the margin from top  */
         text-align: center;
-        margin: auto;
+        margin-top: 0.5%;
+        color: #fff;
       }
       .container {
-        height: 500px;
+        /* change height, added a border raduis and changed the background color */
+        height: 700px; 
         width: 500px;
         margin: auto;
         display: block;
         margin-top: 2%;
-        border-top-left-radius: 2rem;
-        border-top-right-radius: 2rem;
-        background-color: rgba(152, 157, 236, 0.747);
+        margin-bottom: 2%;
+        border-radius: 3rem;
+        background-color: rgba(159,76,86,255);
       }
 
       #form {
-        background: rgba(0, 0, 0, 0.15);
-        padding: 0.25rem;
+        /*changed the color */
+        background:rgba(191,140,144,255);
+        border-radius: 30px;
+        padding: 0.10rem;
         position: absolute;
-        margin: 0;
+        margin-top: 0%;
         width: 500px;
         display: none;
 
@@ -46,45 +51,44 @@
         outline: none;
       }
       #form > button {
-        background: #333;
+        /*edit on the send button*/
+        background: rgba(159,76,86,255);
         border: none;
-        padding: 0 1rem;
+        padding:0 1rem;
         margin: 0.25rem;
-        border-radius: 3px;
-        outline: none;
+        border-radius: 20px;
+        outline:none;
         color: #fff;
       }
 
       #form0 {
-        background: rgba(0, 0, 0, 0.15);
-        padding: 0.25rem;
+        padding: 0.20rem;
         position: fixed;
-        margin: 0;
+        margin: 1px;
         width: 500px;
         display: flex;
-        bottom: 24%;
-        height: 3rem;
+        bottom: 45%;
+        height: 4rem;
         box-sizing: border-box;
-        backdrop-filter: blur(10px);
       }
       #name {
         border: none;
         padding: 0 1rem;
         flex-grow: 1;
-        border-radius: 2rem;
+        border-radius: 1rem;
         margin: 0.25rem;
       }
       #name:focus {
         outline: none;
       }
       #form0 > span {
-        background: #333;
-        border: none;
+        /*edit on the login button */
+        background: #fff;
         padding: 0 1rem;
-        margin: 0.25rem;
-        border-radius: 3px;
-        outline: none;
-        color: #fff;
+        margin: 0.2rem;
+        border-radius: 1rem;
+        outline: auto;
+        color: rgb(159,76,86,255);
       }
       #messages {
         list-style-type: none;
@@ -106,7 +110,7 @@
 
       <div id="con">
         <h1>
-          WELCOME! to OUR Chat
+          Log in to Start a new Chat!
         </h1>
         <span></span>
         <form id="form0">
@@ -132,10 +136,9 @@
       function addemoj(e) {
         document.getElementById("input").value += e;
       }
-      var time = new Date(); //add time
-      var hours,minutes; //declare variables 
-      var names = ["salma", "sara", "sama", "mariam","hazem"];
-      var colors = ["blue", "red", "yellow", "green","grey"];
+
+      var names = ["salma", "sara", "sama", "mariam","hazem"]; //change names
+      var colors = ["blue", "red", "yellow", "green","grey"]; //change colors for each user
       var name = "";
       var color = "";
       function takename() {
@@ -160,11 +163,7 @@
           let msg = {
             name: name,
             color: color,
-            value: input.value,
-            //from here edit to add time
-            hours:time.getHours(),
-            minutes:time.getMinutes(),
-            
+            value: input.value
           };
           socket.emit("chat message", msg);
           input.value = "";
@@ -180,12 +179,7 @@
           msg.name +
           " : </span>" +
           " " +
-          msg.value+
-          //time editing
-          " <br/>"+
-          (msg.hours - 12)+
-          ":"+
-          msg.minutes;
+          msg.value;
         // item.textContent = msg;
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
