@@ -141,6 +141,10 @@
       var colors = ["blue", "red", "yellow", "green","grey"]; //change colors for each user
       var name = "";
       var color = "";
+      //add time.
+      var time = new Date();
+      var hour,minutes ;
+
       function takename() {
         let nameval = document.getElementById("name").value;
         if (names.includes(nameval)) {
@@ -163,7 +167,9 @@
           let msg = {
             name: name,
             color: color,
-            value: input.value
+            value: input.value,
+            hour:time.getHours(),
+            minutes:time.getMinutes(),
           };
           socket.emit("chat message", msg);
           input.value = "";
@@ -179,7 +185,12 @@
           msg.name +
           " : </span>" +
           " " +
-          msg.value;
+          msg.value+
+          //time editing
+          " <br/>"+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
+          msg.hour+
+          ":"+
+          msg.minutes;
         // item.textContent = msg;
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
