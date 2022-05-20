@@ -65,38 +65,45 @@
         position: fixed;
         margin: 1px;
         width: 500px;
-        display: flex;
+        display:flex;
         bottom: 45%;
         height: 4rem;
         box-sizing: border-box;
       }
-      #name {
+      #name, #password{
         border: none;
-        padding: 0 1rem;
+        padding: 20px;
+        padding-left: 70px;
         flex-grow: 1;
         border-radius: 1rem;
-        margin: 0.25rem;
       }
-      #password {
+      #c{
+        align-content: center;
+
+      }
+      
+      #cname,#cpass{
         border: none;
-        padding: 0 1rem;
         flex-grow: 1;
         border-radius: 1rem;
-        margin: 0.25rem;
-        
+        margin-left: 120px;
+        padding:10px;
+      }
+      #clogin{
+        background: #fff;
+        padding: 10px;
+        padding-left: 25px;
+        margin-left: 200px;
+        margin-right: 100px;
+        border-radius: 1rem;
+        outline: auto;
+        color: rgb(159,76,86,255);
+        align-content: center;
       }
       #name:focus {
         outline: none;
       }
-      #form0 > span {
-        /*edit on the login button, sama*/
-        background: #fff;
-        padding: 10px;
-        margin: 0.2rem;
-        border-radius: 1rem;
-        outline: auto;
-        color: rgb(159,76,86,255);
-      }
+      
       #messages {
         list-style-type: none;
         margin: 0;
@@ -126,9 +133,17 @@
         </h1>
         <span></span>
         <form id="form0">
-          <input id="name" placeholder="Enter your name"/>
-          <input id="password" placeholder="Enter your password"/>
-          <span onclick="takename()">Login</span>
+          <div id="c">
+            <div id="cname">
+              <input id="name" placeholder="Enter your name"/>
+            </div>
+            <div id="cpass">
+              <input id="password" placeholder="Enter your password"/>
+            </div>
+            <div id="clogin">
+              <span onclick="takename()">Login</span>
+            </div>
+          </div>
         </form>
       </div>
 
@@ -160,13 +175,11 @@
       var hour,minutes;
 
       function takename() {
-        /////////////////////////////////////////////////////////////////////////////
         let nameval = document.getElementById("name").value;
         let passVal = document.getElementById("password").value;
         if (names.includes(nameval) && passwords.includes(passVal)) {
           name = nameval;
           color = colors[names.indexOf(name)];
-
           document.getElementById("con").style.display = "none";
           document.getElementById("form").style.display = "flex";
         }
