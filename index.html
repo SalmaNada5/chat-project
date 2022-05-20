@@ -77,13 +77,21 @@
         border-radius: 1rem;
         margin: 0.25rem;
       }
+      #password {
+        border: none;
+        padding: 0 1rem;
+        flex-grow: 1;
+        border-radius: 1rem;
+        margin: 0.25rem;
+        
+      }
       #name:focus {
         outline: none;
       }
       #form0 > span {
         /*edit on the login button, sama*/
         background: #fff;
-        padding: 0 1rem;
+        padding: 10px;
         margin: 0.2rem;
         border-radius: 1rem;
         outline: auto;
@@ -102,7 +110,7 @@
       #messages > li:nth-child(even) { 
         background: #bf8c90;  
       }
-      
+
       #messages > li:nth-child(odd) {
         background: #ffff;
       }
@@ -118,7 +126,8 @@
         </h1>
         <span></span>
         <form id="form0">
-          <input id="name" />
+          <input id="name" placeholder="Enter your name"/>
+          <input id="password" placeholder="Enter your password"/>
           <span onclick="takename()">Login</span>
         </form>
       </div>
@@ -143,6 +152,7 @@
 
       var names = ["salma", "sara", "sama", "mariam","hazem"]; //change names.
       var colors = ["blue", "red", "yellow", "green","grey"]; //change colors for each user
+      var passwords = ['1234','1234','1234','1234','1234'];
       var name = "";
       var color = "";
       //add time.
@@ -150,8 +160,10 @@
       var hour,minutes;
 
       function takename() {
+        /////////////////////////////////////////////////////////////////////////////
         let nameval = document.getElementById("name").value;
-        if (names.includes(nameval)) {
+        let passVal = document.getElementById("password").value;
+        if (names.includes(nameval) && passwords.includes(passVal)) {
           name = nameval;
           color = colors[names.indexOf(name)];
 
